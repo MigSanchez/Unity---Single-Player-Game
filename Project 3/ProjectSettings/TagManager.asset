@@ -9,6 +9,7 @@ TagManager:
   - Green PickUp
   - Purple PickUp
   - Death
+  - Floor
   layers:
   - Default
   - TransparentFX

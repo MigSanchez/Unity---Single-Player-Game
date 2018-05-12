@@ -3257,6 +3257,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1161570511150954, guid: 6eef43a8c65164131919a5f0ad2216fc,
     type: 2}
   bulletSpawn: {fileID: 2053071654}
+  jump: {x: 0, y: 0, z: 0}
+  jumpForce: 2
+  isGrounded: 0
 --- !u!54 &767017599
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4288,20 +4291,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Stage 1 - Tutorial
+  m_Text: '1) Use Arrow keys to move
 
+    2) S-Key to fire
 
-    1) Use Arrow keys to move
+    3) F-Key to fly
 
-    2) Prece Space Bar to jump
-
-    3) S-Key to fire
-
-    4) F-Key to fly
-
-    5) Must collect all yellow cubes (tokens) to win
-
-    6) Most Importantly do not fall off!!!!!'
+    4) Must collect all yellow cubes (tokens) to win'
 --- !u!222 &971937442
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7897,9 +7893,10 @@ GameObject:
   - component: {fileID: 1976296922}
   - component: {fileID: 1976296921}
   - component: {fileID: 1976296920}
+  - component: {fileID: 1976296924}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7972,6 +7969,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1976296924
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1976296919}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.999999, y: 2.220446e-16, z: 10.000001}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1997533461
 Transform:
   m_ObjectHideFlags: 0

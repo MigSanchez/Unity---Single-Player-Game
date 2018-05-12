@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour {
     private Scene currentScene;
     private string sceneName;
 
+
+public Vector3 jump;
+         public float jumpForce = 2.0f;
+     
+         public bool isGrounded;
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,7 +39,6 @@ public class PlayerController : MonoBehaviour {
          // Retrieve the name of this scene.
         sceneName = currentScene.name;
     }
-
     void FixedUpdate ()
     {
         float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -44,11 +48,15 @@ public class PlayerController : MonoBehaviour {
 
         rb.AddForce (movement * speed);
 
-       	if (Input.GetKeyDown ("space") && GetComponent<Rigidbody>().transform.position.y <= 0.5f) 
+       	if (Input.GetKeyDown ("space") && isGrounded) 
        	{
-     		Vector3 jump = new Vector3 (0.0f, 180.0f, 0.0f);
+            jump = new Vector3(0.0f, 2.0f, 0.0f);
+             rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+                 isGrounded = false;
+
+            //Vector3 jump = new Vector3 (0.0f, 200.0f, 0.0f);
  
-    		GetComponent<Rigidbody>().AddForce (jump);
+    		//GetComponent<Rigidbody>().AddForce (jump);
      	}
         if (Input.GetKeyDown (KeyCode.F)) 
         {
@@ -78,6 +86,10 @@ public class PlayerController : MonoBehaviour {
 	}
     void OnTriggerEnter(Collider other) 
     {
+        if (other.gameObject.CompareTag ( "Floor"))
+        {
+            isGrounded = true;
+        }
         if (other.gameObject.CompareTag ( "Ground PickUp"))
         {
             other.gameObject.SetActive (false);
@@ -111,8 +123,6 @@ public class PlayerController : MonoBehaviour {
         {
             winText.text = "Tutorial Finished";
             Application.LoadLevel("Level1");
-             //SceneManager.LoadScene("Level1", LoadSceneMode.Additive);
-            //Application.LoadLevel("Level1");
         }
         if (sceneName == "Level1" && count == 21)
         {
@@ -121,7 +131,12 @@ public class PlayerController : MonoBehaviour {
         }
         if (sceneName == "Level2" && count == 24)
         {
-            winText.text = "Level 2 Complete!!";
+            winText.text = "Level 2 complete!";
+            Application.LoadLevel("Level3");
+        }
+        if (sceneName == "Level3" && count == 40)
+        {
+            winText.text = "YOU WIN!!!!!";
         }
     }
 }
