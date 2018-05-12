@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
     private int count;
     private int totalCount;
+    private Scene currentScene;
+    private string sceneName;
 
     void Start ()
     {
@@ -24,6 +27,11 @@ public class PlayerController : MonoBehaviour {
         totalCount = 0;
         SetCountText ();
         winText.text = "";
+        // Create a temporary reference to the current scene.
+        currentScene = SceneManager.GetActiveScene ();
+ 
+         // Retrieve the name of this scene.
+        sceneName = currentScene.name;
     }
 
     void FixedUpdate ()
@@ -79,21 +87,34 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.CompareTag ( "Green PickUp"))
         {
             other.gameObject.SetActive (false);
-            totalCount = count + 3;
+            totalCount = totalCount + 3;
             SetCountText ();
         }
         if (other.gameObject.CompareTag ( "Purple PickUp"))
         {
             other.gameObject.SetActive (false);
-            totalCount = count + 5;
+            totalCount = totalCount + 5;
             SetCountText ();
         }
+		if (other.transform.CompareTag ( "Death"))
+        {
+            transform.position = new Vector3(0.0f, 0.5f, 0.0f);
+   		}
+
     }
 
     void SetCountText ()
     {
         countText.text = "Score: " + totalCount.ToString ();
-        if (count >= 21)
+        if (sceneName == "Official" && count >= 3)
+        {
+            winText.text = "You Win!";
+        }
+        if (sceneName == "Level1" && count == 21)
+        {
+            winText.text = "You did it, Level 1 COMPLETE!!";
+        }
+        if (sceneName == "Level2" && count == 24)
         {
             winText.text = "You Win!";
         }
