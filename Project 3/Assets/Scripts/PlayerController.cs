@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject bulletPrefab;
 	public Transform bulletSpawn;
 
+    private int globalTotal;
     private Rigidbody rb;
     private int count;
     private int totalCount;
@@ -126,16 +127,22 @@ public Vector3 jump;
         }
         if (sceneName == "Level1" && count == 21)
         {
+            count =0;
+            globalTotal += totalCount;
             winText.text = "Level 1 complete!";
             Application.LoadLevel("Level2");
         }
         if (sceneName == "Level2" && count == 24)
         {
+
+            count = 0;
+            globalTotal +=totalCount;
             winText.text = "Level 2 complete!";
             Application.LoadLevel("Level3");
         }
         if (sceneName == "Level3" && count == 40)
         {
+            globalTotal += totalCount;
             winText.text = "YOU WIN!!!!!";
         }
     }
