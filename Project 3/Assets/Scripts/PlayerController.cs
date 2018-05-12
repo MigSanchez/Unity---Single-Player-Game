@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class PlayerController : MonoBehaviour {
 
 	
@@ -108,15 +109,19 @@ public class PlayerController : MonoBehaviour {
         countText.text = "Score: " + totalCount.ToString ();
         if (sceneName == "Official" && count >= 3)
         {
-            winText.text = "You Win!";
+            winText.text = "Tutorial Finished";
+            Application.LoadLevel("Level1");
+             //SceneManager.LoadScene("Level1", LoadSceneMode.Additive);
+            //Application.LoadLevel("Level1");
         }
         if (sceneName == "Level1" && count == 21)
         {
-            winText.text = "You did it, Level 1 COMPLETE!!";
+            winText.text = "Level 1 complete!";
+            Application.LoadLevel("Level2");
         }
         if (sceneName == "Level2" && count == 24)
         {
-            winText.text = "You Win!";
+            winText.text = "Level 2 Complete!!";
         }
     }
 }
